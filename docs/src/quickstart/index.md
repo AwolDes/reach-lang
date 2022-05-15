@@ -64,9 +64,13 @@ $ wsl --install -d Ubuntu
 ```
 
 :::note
+<<<<<<< HEAD
 When the installation is finished, a terminal called `Ubuntu` should open on your screen.
 It will request that you set up a user and password.
 Make sure you don't skip this step.
+=======
+When the installation is finished, a terminal called `Ubuntu` should open on your screen. It will request that you setup a user and password. Make sure you don't skip this step.
+>>>>>>> ff5419dd4 (feat: new homepage)
 :::
 
 ## {#qs-installing-docker} Installing Docker:
