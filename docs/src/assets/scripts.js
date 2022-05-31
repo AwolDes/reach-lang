@@ -54,6 +54,8 @@ const establishDisplay = () => {
         localStorage.setItem('book-col', display);
         break;
     }
+    bookCol.style.display = 'none';
+    bookBtn.style.display = 'block';
   }
 
   if (currentPage.hasOtp) {
