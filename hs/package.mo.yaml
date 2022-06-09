@@ -90,6 +90,7 @@ dependencies:
 - tomland
 - base16
 - attoparsec
+- Glob
 
 default-extensions:
 - BangPatterns
@@ -191,3 +192,6 @@ executables:
     - safe
     - unix
     - reach
+  reachpc:
+    <<: *std-exe
+    source-dirs: app/reachpc

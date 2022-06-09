@@ -150,6 +150,10 @@ watch-reachc: expand
 watch-tsa: expand
 	@$(call w,exe:tsa)
 
+.PHONY: watch-reachpc
+watch-reachpc: expand
+	@$(call w,exe:reachpc)
+
 .PHONY: repl-reach-cli
 repl-reach-cli: expand
 	@stack ghci app/reach/Main.hs $(MEVEREST) \
