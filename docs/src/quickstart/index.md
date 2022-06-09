@@ -98,9 +98,15 @@ After installing Docker, reboot:
 shutdown -r -t 0
 ```
 
+<<<<<<< HEAD
 ## {#qs-win-conf-docker} Configuring Docker:
 
 Open Docker and wait for it to initialize.
+=======
+## {#qs-win-conf-docker} Configuring docker:
+
+Open Docker and wait until it is fully started
+>>>>>>> 334986569 (DCT-459)
 Click the `Settings` (gear) icon along the top of the Docker app.
 
 ![Settings icon in Docker`](/quickstart/settings-icon.png)
