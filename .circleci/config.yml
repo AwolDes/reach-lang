@@ -56,11 +56,11 @@ jobs:
           shell: bash.exe
           command: |
             curl -sSL https://get.haskellstack.org/ | bash
-      # - run:
-      #     name: Compile
-      #     shell: bash.exe
-      #     command: |
-      #       cd hs
+            choco install make wget
+      - run:
+          name: Compile
+          shell: bash.exe
+          command: make -C hs hs-build
 
 
 workflows:
