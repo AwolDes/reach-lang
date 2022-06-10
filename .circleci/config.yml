@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - checkout
-      - run: wget -qO- https://get.haskellstack.org/ | sh
+      - run: curl -sSL https://get.haskellstack.org/ | sh
       - run: make -C hs hs-build
 
 workflows:
