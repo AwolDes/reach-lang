@@ -59,13 +59,13 @@ jobs:
 workflows:
   build:
     jobs:
+      - windows_build
+      - mac_build
       # - hold_build_all_os:
       #     type: approval
-
-      - windows_build:
-          # requires:
-          #   - hold_build_all_os
-
-      - mac_build:
-          # requires:
-          #   - hold_build_all_os
+      # - windows_build:
+      #     requires:
+      #       - hold_build_all_os
+      # - mac_build:
+      #     requires:
+      #       - hold_build_all_os
