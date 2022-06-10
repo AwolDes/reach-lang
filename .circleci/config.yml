@@ -19,13 +19,13 @@ version: 2.1
 #     jobs:
 #       - setup
 
+orbs:
+  windows: circleci/windows@4.1.1
+
 jobs:
-  mac_test:
+  mac_build:
     macos:
       xcode: 12.5.1
-
-    resource_class: macos.x86.medium.gen2
-
     steps:
       - checkout
       - run:
@@ -40,8 +40,30 @@ jobs:
       - run:
           name: Compile
           command: make -C hs hs-build
+  windows_build:
+    executor:
+      name: win/default
+    steps:
+      - checkout
+      # - run:
+      #     name: Install command dependencies
+      #     command: |
+      #       Invoke-WebRequest "https://get.haskellstack.org/stable/windows-x86_64.zip" -OutFile "stack.zip"
+      #       Expand-Archive "stack.zip" -DestinationPath "stack/"
+      #       Copy-Item "stack\stack.exe" -Destination "$env:APPDATA\local\bin\stack.exe"
+      - run:
+          name: Install command dependencies
+          shell: bash.exe
+          command: |
+            curl -sSL https://get.haskellstack.org/ | bash
+      # - run:
+      #     name: Compile
+      #     shell: bash.exe
+      #     command: |
+      #       cd hs
+
 
 workflows:
   build:
     jobs:
-      - mac_test
+      - windows_build
