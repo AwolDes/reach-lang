@@ -67,7 +67,6 @@ workflows:
   build:
     jobs:
       - hold_build_all_os:
-          name: Build for all operating systems
           type: approval
 
       - windows_build:
