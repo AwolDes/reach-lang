@@ -27,14 +27,14 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install command dependencies
-        command: |
-          curl -sSL https://get.haskellstack.org/ | sh
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install wget
-          make -C hs install-mo
+          name: Install command dependencies
+          command: |
+            curl -sSL https://get.haskellstack.org/ | sh
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install wget
+            make -C hs install-mo
       - run:
-        name: Compile
-        command: make -C hs hs-build
+          name: Compile
+          command: make -C hs hs-build
 
 workflows:
   build:
