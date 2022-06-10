@@ -42,7 +42,7 @@ jobs:
           command: make -C hs hs-build
   windows_build:
     executor:
-      name: win/default
+      name: windows/default
     steps:
       - checkout
       # - run:
