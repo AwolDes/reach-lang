@@ -37,7 +37,7 @@ dependencies:
 - hspec-smallcheck
 - http-client-tls
 - http-conduit
-- io-capture
+# - io-capture
 - language-javascript >= 0.7.1.1
 - lattices
 - loop
@@ -190,7 +190,7 @@ executables:
     - neat-interpolation
     - parsec
     - safe
-    - unix
+    #- unix
     - reach
   reachpc:
     <<: *std-exe

@@ -13,7 +13,7 @@ import qualified Data.Aeson as A
 import qualified Data.Aeson.Key as K
 import qualified Data.Aeson.KeyMap as KM
 import qualified Data.Aeson.Types as A
-import Data.Bits
+-- import Data.Bits
 import qualified Data.ByteString.Internal as BSI
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.ByteString.Lazy.Char8 as BSLC8
@@ -54,7 +54,7 @@ import System.Exit
 import System.FilePath
 import System.IO
 import System.Info
-import System.Posix.Files
+-- import System.Posix.Files
 import Text.Parsec (ParsecT, eof, parse, runParserT, try)
 import Text.Parsec.Char
 import Text.Parsec.Language
@@ -344,7 +344,7 @@ warnScaffoldDefRPCTLSPair (Project {..}) = do
   let embd r = e_dirEmbed </> "rpc" </> r
   let dock r = projDirContainer </> "tls" </> r
   let host r = projDirHost </> "tls" </> r
-  let orw = ownerReadMode .|. ownerWriteMode
+  -- let orw = ownerReadMode .|. ownerWriteMode
   let key = unpack $ rpcTLSKey e_var
   let crt = unpack $ rpcTLSCrt e_var
   liftIO $
@@ -353,8 +353,8 @@ warnScaffoldDefRPCTLSPair (Project {..}) = do
         createDirectoryIfMissing False $ dock ""
         readFile (embd "tls-default.key") >>= writeFile (dock key)
         readFile (embd "tls-default.crt") >>= writeFile (dock crt)
-        setFileMode (dock key) orw
-        setFileMode (dock crt) $ orw .|. groupReadMode .|. otherReadMode
+        -- setFileMode (dock key) orw
+        -- setFileMode (dock crt) $ orw .|. groupReadMode .|. otherReadMode
         warnDev
       (False, True) -> die $ host key <> " doesn't exist!"
       (True, False) -> die $ host crt <> " doesn't exist!"
@@ -1256,8 +1256,10 @@ run' = command "run" . info f $ d <> noIntersperse
           (not <$> doesFileExist bjs)
           (pure $ Just recompile')
           $ do
-            b <- modificationTime <$> getFileStatus bjs
-            r <- modificationTime <$> getFileStatus rsh
+            -- b <- modificationTime <$> getFileStatus bjs
+            -- r <- modificationTime <$> getFileStatus rsh
+            let r = 1 :: Int
+            let b = 0 :: Int
             pure $ if r > b then Just recompile' else Nothing
 
       let dm@DockerMeta {..} = mkDockerMetaProj e proj Console
