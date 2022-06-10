@@ -32,8 +32,11 @@ jobs:
           name: Install command dependencies
           command: |
             curl -sSL https://get.haskellstack.org/ | sh
-            HOMEBREW_NO_AUTO_UPDATE=1 brew install wget
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install wget llvm
             make -C hs install-mo
+            echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> /Users/distiller/.bash_profile
+            export LDFLAGS="-L/usr/local/opt/llvm/lib"
+            export CPPFLAGS="-I/usr/local/opt/llvm/include"
       - run:
           name: Compile
           command: make -C hs hs-build
