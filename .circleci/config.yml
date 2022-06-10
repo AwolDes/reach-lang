@@ -66,4 +66,14 @@ jobs:
 workflows:
   build:
     jobs:
-      - windows_build
+      - hold_build_all_os:
+          name: Build for all operating systems
+          type: approval
+
+      - windows_build:
+          requires:
+            - hold_build_all_os
+
+      - mac_build:
+          requires:
+            - hold_build_all_os
