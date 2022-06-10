@@ -32,11 +32,10 @@ jobs:
           name: Install command dependencies
           command: |
             curl -sSL https://get.haskellstack.org/ | sh
-            HOMEBREW_NO_AUTO_UPDATE=1 brew install wget llvm
-            make -C hs install-mo
-            echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> /Users/distiller/.bash_profile
-            export LDFLAGS="-L/usr/local/opt/llvm/lib"
-            export CPPFLAGS="-I/usr/local/opt/llvm/include"
+            # HOMEBREW_NO_AUTO_UPDATE=1 brew install wget llvm
+            # echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> /Users/distiller/.bash_profile
+            # export LDFLAGS="-L/usr/local/opt/llvm/lib"
+            # export CPPFLAGS="-I/usr/local/opt/llvm/include"
       - run:
           name: Compile
           command: make -C hs hs-build
@@ -45,12 +44,6 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      # - run:
-      #     name: Install command dependencies
-      #     command: |
-      #       Invoke-WebRequest "https://get.haskellstack.org/stable/windows-x86_64.zip" -OutFile "stack.zip"
-      #       Expand-Archive "stack.zip" -DestinationPath "stack/"
-      #       Copy-Item "stack\stack.exe" -Destination "$env:APPDATA\local\bin\stack.exe"
       - run:
           name: Install command dependencies
           shell: bash.exe
@@ -66,13 +59,13 @@ jobs:
 workflows:
   build:
     jobs:
-      - hold_build_all_os:
-          type: approval
+      # - hold_build_all_os:
+      #     type: approval
 
       - windows_build:
-          requires:
-            - hold_build_all_os
+          # requires:
+          #   - hold_build_all_os
 
       - mac_build:
-          requires:
-            - hold_build_all_os
+          # requires:
+          #   - hold_build_all_os
