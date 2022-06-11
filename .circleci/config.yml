@@ -65,18 +65,15 @@ jobs:
           shell: bash.exe
           command: make -C hs hs-release
 
+parameters:
+  run_release_builds:
+    type: boolean
+    default: false
 
 workflows:
-  build:
+  release_builds:
+    when: << pipeline.parameters.run_release_builds >>
     jobs:
       - windows_build
       - mac_build
       - linux_build
-      # - hold_build_all_os:
-      #     type: approval
-      # - windows_build:
-      #     requires:
-      #       - hold_build_all_os
-      # - mac_build:
-      #     requires:
-      #       - hold_build_all_os
