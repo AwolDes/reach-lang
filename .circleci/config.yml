@@ -31,6 +31,17 @@ jobs:
       - run:
           name: Compile
           command: make -C hs hs-release
+      - run:
+          name: Gather artifacts
+          command: |
+            REACH="$(stack exec -- which reach)"
+            REACHPC="$(stack exec -- which reachpc)"
+            REACHC="$(stack exec -- which reachc)"
+            strip "$REACH" "$REACHPC" "$REACHC"
+            mkdir /tmp/artifacts
+            mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
 
   mac_build:
     macos:
@@ -48,6 +59,17 @@ jobs:
       - run:
           name: Compile
           command: make -C hs hs-release
+      - run:
+          name: Gather artifacts
+          command: |
+            REACH="$(stack exec -- which reach)"
+            REACHPC="$(stack exec -- which reachpc)"
+            REACHC="$(stack exec -- which reachc)"
+            strip "$REACH" "$REACHPC" "$REACHC"
+            mkdir /tmp/artifacts
+            mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
 
   windows_build:
     executor:
@@ -64,6 +86,17 @@ jobs:
           name: Compile
           shell: bash.exe
           command: make -C hs hs-release
+      - run:
+          name: Gather artifacts
+          shell: bash.exe
+          command: |
+            REACH="$(stack exec -- which reach)"
+            REACHPC="$(stack exec -- which reachpc)"
+            REACHC="$(stack exec -- which reachc)"
+            mkdir /tmp/artifacts
+            mv "$REACH" "$REACHC" "$REACHPC" /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
 
 parameters:
   run_release_builds:
