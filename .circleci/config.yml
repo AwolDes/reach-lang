@@ -101,7 +101,7 @@ jobs:
 parameters:
   run_release_builds:
     type: boolean
-    default: false
+    default: true
 
 workflows:
   release_builds:
