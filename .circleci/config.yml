@@ -30,9 +30,7 @@ jobs:
       - checkout
       - run:
           name: Compile
-          command: |
-            cd hs
-            stack build
+          command: make -C hs hs-release
 
   mac_build:
     macos:
@@ -49,9 +47,7 @@ jobs:
             # export CPPFLAGS="-I/usr/local/opt/llvm/include"
       - run:
           name: Compile
-          command: |
-            cd hs
-            stack build
+          command: make -C hs hs-release
 
   windows_build:
     executor:
@@ -67,9 +63,7 @@ jobs:
       - run:
           name: Compile
           shell: bash.exe
-          command: |
-            cd hs
-            stack build
+          command: make -C hs hs-release
 
 
 workflows:
