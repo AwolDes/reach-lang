@@ -23,6 +23,17 @@ orbs:
   windows: circleci/windows@4.1.1
 
 jobs:
+  linux_build:
+    docker:
+      - image: haskell:9.0.2
+    steps:
+      - checkout
+      - run:
+          name: Compile
+          command: |
+            cd hs
+            stack build
+
   mac_build:
     macos:
       xcode: 12.5.1
@@ -38,7 +49,10 @@ jobs:
             # export CPPFLAGS="-I/usr/local/opt/llvm/include"
       - run:
           name: Compile
-          command: make -C hs hs-build
+          command: |
+            cd hs
+            stack build
+
   windows_build:
     executor:
       name: windows/default
@@ -53,7 +67,9 @@ jobs:
       - run:
           name: Compile
           shell: bash.exe
-          command: make -C hs hs-build
+          command: |
+            cd hs
+            stack build
 
 
 workflows:
@@ -61,6 +77,7 @@ workflows:
     jobs:
       - windows_build
       - mac_build
+      - linux_build
       # - hold_build_all_os:
       #     type: approval
       # - windows_build:
