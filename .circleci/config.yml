@@ -76,29 +76,25 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      # - run:
-      #     name: Install command dependencies
-      #     shell: bash.exe
-      #     command: |
-      #       curl -sSL https://get.haskellstack.org/ | bash
-      #       choco install make wget
-      # - run:
-      #     name: Compile
-      #     shell: bash.exe
-      #     command: make -C hs hs-release
-      # - run:
-      #     name: Gather artifacts
-      #     shell: bash.exe
-      #     command: |
-      #       REACH="$(stack exec -- which reach)"
-      #       REACHPC="$(stack exec -- which reachpc)"
-      #       REACHC="$(stack exec -- which reachc)"
-      #       mkdir /tmp/artifacts
-      #       mv "$REACH" "$REACHC" "$REACHPC" /tmp/artifacts
-      - run: |
-          mkdir /tmp/artifacts
-          touch /tmp/artifacts/abc
-          echo "hello" > /tmp/artifacts/hello
+      - run:
+          name: Install command dependencies
+          shell: bash.exe
+          command: |
+            curl -sSL https://get.haskellstack.org/ | bash
+            choco install make wget
+      - run:
+          name: Compile
+          shell: bash.exe
+          command: make -C hs hs-release
+      - run:
+          name: Gather artifacts
+          shell: bash.exe
+          command: |
+            REACH="$(stack exec -- which reach)"
+            REACHPC="$(stack exec -- which reachpc)"
+            REACHC="$(stack exec -- which reachc)"
+            mkdir /tmp/artifacts
+            mv "$REACH" "$REACHC" "$REACHPC" /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
 
@@ -112,5 +108,5 @@ workflows:
     when: << pipeline.parameters.run_release_builds >>
     jobs:
       - windows_build
-      # - mac_build
-      # - linux_build
+      - mac_build
+      - linux_build
