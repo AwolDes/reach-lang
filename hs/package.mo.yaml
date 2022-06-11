@@ -32,16 +32,16 @@ dependencies:
 - file-embed >= 0.0.9
 - filepath
 - generic-deriving
-- hexstring
+# - hexstring
 - hspec
-- hspec-smallcheck
+# - hspec-smallcheck
 - http-client-tls
 - http-conduit
 # - io-capture
 - language-javascript >= 0.7.1.1
-- lattices
-- loop
-- main-tester
+# - lattices
+# - loop
+# - main-tester
 - memory
 - mtl
 - optparse-applicative
@@ -49,7 +49,7 @@ dependencies:
 - parsec-numbers
 - pretty-show
 - pretty-simple
-- prettyprinter
+# - prettyprinter
 - process
 - process-extras
 - regex
@@ -59,7 +59,7 @@ dependencies:
 - search-algorithms
 - silently
 - simple-smt
-- smallcheck
+# - smallcheck
 - stm
 - system-filepath
 - tasty
@@ -77,8 +77,8 @@ dependencies:
 - time
 - transformers
 - unix-compat
-- unordered-containers
-- utf8-string
+# - unordered-containers
+# - utf8-string
 - vector
 - wai-extra
 - yaml
