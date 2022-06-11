@@ -28,18 +28,20 @@ jobs:
       - image: haskell:9.0.2
     steps:
       - checkout
-      - run: |
-          # Compile
-          cd hs
-          make hs-build
+      - run: 
+          name: Compile
+          command: |
+            # Compile
+            cd hs
+            make hs-build
 
-          # Gather artifacts
-          REACH="$(stack exec -- which reach)"
-          REACHPC="$(stack exec -- which reachpc)"
-          REACHC="$(stack exec -- which reachc)"
-          strip "$REACH" "$REACHPC" "$REACHC"
-          mkdir /tmp/artifacts
-          mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+            # Gather artifacts
+            REACH="$(stack exec -- which reach)"
+            REACHPC="$(stack exec -- which reachpc)"
+            REACHC="$(stack exec -- which reachc)"
+            strip "$REACH" "$REACHPC" "$REACHC"
+            mkdir /tmp/artifacts
+            mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
 
@@ -48,22 +50,24 @@ jobs:
       xcode: 12.5.1
     steps:
       - checkout
-      - run: |
-          # Install command dependencies
-          curl -sSL https://get.haskellstack.org/ | sh
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install wget
+      - run:
+          name: Compile
+          command: |
+            # Install command dependencies
+            curl -sSL https://get.haskellstack.org/ | sh
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install wget
 
-          # Compile
-          cd hs/
-          make hs-build
+            # Compile
+            cd hs
+            make hs-build
           
-          # Gather artifacts
-          REACH="$(stack exec -- which reach)"
-          REACHPC="$(stack exec -- which reachpc)"
-          REACHC="$(stack exec -- which reachc)"
-          strip "$REACH" "$REACHPC" "$REACHC"
-          mkdir /tmp/artifacts
-          mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+            # Gather artifacts
+            REACH="$(stack exec -- which reach)"
+            REACHPC="$(stack exec -- which reachpc)"
+            REACHC="$(stack exec -- which reachc)"
+            strip "$REACH" "$REACHPC" "$REACHC"
+            mkdir /tmp/artifacts
+            mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
 
@@ -73,6 +77,7 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Compile
           shell: bash.exe
           command: |
             # Install command dependencies
