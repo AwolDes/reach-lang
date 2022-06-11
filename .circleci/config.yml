@@ -28,18 +28,18 @@ jobs:
       - image: haskell:9.0.2
     steps:
       - checkout
-      - run:
-          name: Compile
-          command: make -C hs hs-release
-      - run:
-          name: Gather artifacts
-          command: |
-            REACH="$(stack exec -- which reach)"
-            REACHPC="$(stack exec -- which reachpc)"
-            REACHC="$(stack exec -- which reachc)"
-            strip "$REACH" "$REACHPC" "$REACHC"
-            mkdir /tmp/artifacts
-            mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+      - run: |
+          # Compile
+          cd hs
+          make hs-build
+
+          # Gather artifacts
+          REACH="$(stack exec -- which reach)"
+          REACHPC="$(stack exec -- which reachpc)"
+          REACHC="$(stack exec -- which reachc)"
+          strip "$REACH" "$REACHPC" "$REACHC"
+          mkdir /tmp/artifacts
+          mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
 
@@ -48,26 +48,22 @@ jobs:
       xcode: 12.5.1
     steps:
       - checkout
-      - run:
-          name: Install command dependencies
-          command: |
-            curl -sSL https://get.haskellstack.org/ | sh
-            HOMEBREW_NO_AUTO_UPDATE=1 brew install wget # llvm
-            # echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> /Users/distiller/.bash_profile
-            # export LDFLAGS="-L/usr/local/opt/llvm/lib"
-            # export CPPFLAGS="-I/usr/local/opt/llvm/include"
-      - run:
-          name: Compile
-          command: make -C hs hs-release
-      - run:
-          name: Gather artifacts
-          command: |
-            REACH="$(stack exec -- which reach)"
-            REACHPC="$(stack exec -- which reachpc)"
-            REACHC="$(stack exec -- which reachc)"
-            strip "$REACH" "$REACHPC" "$REACHC"
-            mkdir /tmp/artifacts
-            mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+      - run: |
+          # Install command dependencies
+          curl -sSL https://get.haskellstack.org/ | sh
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install wget
+
+          # Compile
+          cd hs/
+          make hs-build
+          
+          # Gather artifacts
+          REACH="$(stack exec -- which reach)"
+          REACHPC="$(stack exec -- which reachpc)"
+          REACHC="$(stack exec -- which reachc)"
+          strip "$REACH" "$REACHPC" "$REACHC"
+          mkdir /tmp/artifacts
+          mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
 
@@ -77,19 +73,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install command dependencies
           shell: bash.exe
           command: |
+            # Install command dependencies
             curl -sSL https://get.haskellstack.org/ | bash
             choco install make wget
-      - run:
-          name: Compile
-          shell: bash.exe
-          command: make -C hs hs-release
-      - run:
-          name: Gather artifacts
-          shell: bash.exe
-          command: |
+
+            # Compile
+            cd hs
+            make hs-build
+            
+            # Gather artifacts
             REACH="$(stack exec -- which reach)"
             REACHPC="$(stack exec -- which reachpc)"
             REACHC="$(stack exec -- which reachc)"
