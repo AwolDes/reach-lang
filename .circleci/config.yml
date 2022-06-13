@@ -42,6 +42,7 @@ jobs:
             strip "$REACH" "$REACHPC" "$REACHC"
             mkdir -p /tmp/artifacts
             mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+            for art in /tmp/artifacts/*; do gzip "$art"; done
       - store_artifacts:
           path: /tmp/artifacts
 
@@ -68,6 +69,7 @@ jobs:
             strip "$REACH" "$REACHPC" "$REACHC"
             mkdir -p /tmp/artifacts
             mv "$REACH" "$REACHPC" "$REACHC" /tmp/artifacts
+            for art in /tmp/artifacts/*; do gzip "$art"; done
       - store_artifacts:
           path: /tmp/artifacts
 
@@ -94,6 +96,7 @@ jobs:
             REACHC="$(stack exec -- which reachc)"
             mkdir -p /c/tmp/artifacts
             mv "$REACH" "$REACHC" "$REACHPC" /c/tmp/artifacts
+            for art in /c/tmp/artifacts/*; do 7z a "$art".gz "$art"; done
       - store_artifacts:
           path: /tmp/artifacts
 
