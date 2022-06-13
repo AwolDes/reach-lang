@@ -76,7 +76,6 @@ jobs:
   windows_build:
     executor:
       name: windows/default
-      size: "large"
     steps:
       - checkout
       - run:
