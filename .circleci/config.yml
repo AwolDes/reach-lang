@@ -96,7 +96,7 @@ jobs:
             REACHC="$(stack exec -- which reachc)"
             mkdir -p /c/tmp/artifacts
             mv "$REACH" "$REACHC" "$REACHPC" /c/tmp/artifacts
-            for art in /c/tmp/artifacts/*; do 7z a "$art".gz "$art"; done
+            for art in /c/tmp/artifacts/*; do 7z -sdel a "$art".gz "$art"; done
       - store_artifacts:
           path: /tmp/artifacts
 
