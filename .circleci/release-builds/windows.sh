@@ -1,9 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
 # Install command dependencies
 curl -sSL https://get.haskellstack.org/ | bash
 choco install make wget
 
 # Compile
-cd hs
+cd hs || exit
 make hs-release
 
 # Gather artifacts

@@ -1,9 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
 # Install command dependencies
 curl -sSL https://get.haskellstack.org/ | sh
 HOMEBREW_NO_AUTO_UPDATE=1 brew install wget
 
 # Compile
-cd hs
+cd hs || exit
 make hs-release
 
 # Gather artifacts

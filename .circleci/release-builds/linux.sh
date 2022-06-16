@@ -1,5 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
 # Compile
-cd hs
+cd hs || exit
 make hs-release
 
 # Gather artifacts
