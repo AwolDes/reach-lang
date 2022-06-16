@@ -1,0 +1,53 @@
+version: 2.1
+
+workflows:
+
+  release_builds:
+    jobs:
+      - windows_build
+      - mac_build
+      - linux_build
+
+orbs:
+  windows: circleci/windows@4.1.1
+
+jobs:
+  approve_builds:
+    type: approval
+
+  linux_build:
+    requires:
+      - approve_builds
+    docker:
+      - image: haskell:9.0.2
+    steps:
+      - checkout
+      - run: .circleci/release-builds/linux.sh
+      - store_artifacts:
+          path: /tmp/artifacts
+
+  mac_build:
+    requires:
+      - approve_builds
+    macos:
+      xcode: 12.5.1
+    steps:
+      - checkout
+      - run: .circleci/release-builds/mac.sh
+      - store_artifacts:
+          path: /tmp/artifacts
+
+  windows_build:
+    requires:
+      - approve_builds
+    executor:
+      name: windows/default
+    steps:
+      - checkout
+      - run:
+          name: Compile
+          shell: bash.exe
+          command: .circleci/release-builds/windows.sh
+      - store_artifacts:
+          path: /tmp/artifacts
+
