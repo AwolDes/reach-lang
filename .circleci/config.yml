@@ -8,6 +8,10 @@ workflows:
     jobs:
       - run_release_builds
 
+  setup:
+    jobs:
+      - setup
+
 jobs:
   run_release_builds:
     executor: continuation/default
@@ -16,17 +20,12 @@ jobs:
       - continuation/continue:
           configuration_path: .circleci/release-builds/config.yml
 
-  # setup:
-  #   executor: continuation/default
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Generate config
-  #         command: cd .circleci && ./make.sh
-  #     - continuation/continue:
-  #         configuration_path: ./.circleci/config.gen.yml
-
-# workflows:
-#   setup:
-#     jobs:
-#       - setup
+  setup:
+    executor: continuation/default
+    steps:
+      - checkout
+      - run:
+          name: Generate config
+          command: cd .circleci && ./make.sh
+      - continuation/continue:
+          configuration_path: ./.circleci/config.gen.yml
