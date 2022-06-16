@@ -2,6 +2,11 @@ version: 2.1
 orbs:
   continuation: circleci/continuation@0.1.2
 
+workflows:
+  release_builds:
+    jobs:
+      - release_builds
+
 jobs:
   release_builds:
     executor: continuation/default
@@ -20,8 +25,8 @@ jobs:
   #     - continuation/continue:
   #         configuration_path: ./.circleci/config.gen.yml
 
-setup: true
-workflows:
-  setup:
-    jobs:
-      - setup
+# setup: true
+# workflows:
+#   setup:
+#     jobs:
+#       - setup
