@@ -64,13 +64,9 @@ $ wsl --install -d Ubuntu
 ```
 
 :::note
-<<<<<<< HEAD
 When the installation is finished, a terminal called `Ubuntu` should open on your screen.
 It will request that you set up a user and password.
 Make sure you don't skip this step.
-=======
-When the installation is finished, a terminal called `Ubuntu` should open on your screen. It will request that you setup a user and password. Make sure you don't skip this step.
->>>>>>> ff5419dd4 (feat: new homepage)
 :::
 
 ## {#qs-installing-docker} Installing Docker:
@@ -98,15 +94,9 @@ After installing Docker, reboot:
 shutdown -r -t 0
 ```
 
-<<<<<<< HEAD
 ## {#qs-win-conf-docker} Configuring Docker:
 
 Open Docker and wait for it to initialize.
-=======
-## {#qs-win-conf-docker} Configuring docker:
-
-Open Docker and wait until it is fully started
->>>>>>> 334986569 (DCT-459)
 Click the `Settings` (gear) icon along the top of the Docker app.
 
 ![Settings icon in Docker`](/quickstart/settings-icon.png)
